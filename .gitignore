@@ -1,0 +1,18 @@
+# go
+vendor/*
+app/log/*
+
+# ios
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcworkspace/contents.xcworkspacedata
+Pods/
+*.playground
+UserInterfaceState.xcuserstate
+GoogleService-Info.plist
+
+# Etc
+.DS_Store
+.idea/
+eventory.iml
+dbconfig.yml
