@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"math/rand"
+	"net/http"
 	"time"
 
 	"github.com/labstack/echo"
@@ -48,7 +49,7 @@ type Image struct {
 	ImageURL string
 }
 
-func createImages(image Image) []Image {
+func createImages() []Image {
 
 	image1 := Image{
 		category: "1",
@@ -105,10 +106,11 @@ func createImages(image Image) []Image {
 	return images
 }
 
-func (p *PhaseOne) Response(c echo.Context, images []Image) (error, []byte) {
+func (p *PhaseOne) Response(c echo.Context) error {
 	// 乱数で送信するカテゴリ画像とカテゴリNoを決定する
 
 	rand.Seed(time.Now().Unix())
+	images := createImages()
 	selectedImage1 := images[rand.Intn(len(images))]
 	selectedImage2 := images[rand.Intn(len(images))]
 	selectedImage3 := images[rand.Intn(len(images))]
@@ -121,9 +123,9 @@ func (p *PhaseOne) Response(c echo.Context, images []Image) (error, []byte) {
 	imagesJSON, err := json.Marshal(selectedImages)
 	if err != nil {
 		log.Println(err)
-		return err, nil
+		return err
 	}
 
-	// return c.String(http.StatusOK), selectedImages
-	return nil, imagesJSON
+	return c.JSON(http.StatusOK, imagesJSON)
+	//return nil, imagesJSON
 }
