@@ -41,17 +41,6 @@ func ScanRecipe(r *sql.Row) (Recipe, error) {
 	if err := r.Scan(
 		&s.ID,
 		&s.Name,
-		&s.CategoryID,
-		&s.Count1,
-		&s.Count2,
-		&s.Count3,
-		&s.Count4,
-		&s.Count5,
-		&s.Count6,
-		&s.Count7,
-		&s.Count8,
-		&s.Count9,
-		&s.Count10,
 	); err != nil {
 		return Recipe{}, err
 	}
@@ -66,17 +55,6 @@ func ScanRecipes(rs *sql.Rows) ([]Recipe, error) {
 		if err = rs.Scan(
 			&s.ID,
 			&s.Name,
-			&s.CategoryID,
-			&s.Count1,
-			&s.Count2,
-			&s.Count3,
-			&s.Count4,
-			&s.Count5,
-			&s.Count6,
-			&s.Count7,
-			&s.Count8,
-			&s.Count9,
-			&s.Count10,
 		); err != nil {
 			return nil, err
 		}
