@@ -10,7 +10,6 @@ import (
 	"github.com/labstack/echo/middleware"
 	"github.com/line-bot/motivating_menu/api"
 	"github.com/line-bot/motivating_menu/db"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -47,6 +46,7 @@ func (s *Server) Run() {
 
 	s.echo.GET("/callback", api.Line)
 	s.echo.GET("/api/get", api.GetTest)
+    s.echo.GET("/test", api.Test)
 	s.echo.POST("/api/post", api.PostTest)
 	s.echo.PUT("/api/put", api.PutTest)
 	s.echo.DELETE("/api/delete", api.DeleteTest)
