@@ -2,6 +2,8 @@ package phaseOne
 
 import (
 	"database/sql"
+	"encoding/json"
+	"log"
 	"math/rand"
 	"time"
 
@@ -103,7 +105,7 @@ func createImages(image Image) []Image {
 	return images
 }
 
-func (p *PhaseOne) Response(c echo.Context, images []Image) []Image {
+func (p *PhaseOne) Response(c echo.Context, images []Image) (error, []byte) {
 	// 乱数で送信するカテゴリ画像とカテゴリNoを決定する
 
 	rand.Seed(time.Now().Unix())
@@ -116,7 +118,12 @@ func (p *PhaseOne) Response(c echo.Context, images []Image) []Image {
 
 	// Jsonフォーマットに沿ったstringを作成する
 	// ※構造体でいい感じに出来るなら、それでもおｋ。出来上がればなんでも！
+	imagesJSON, err := json.Marshal(selectedImages)
+	if err != nil {
+		log.Println(err)
+		return err, nil
+	}
 
 	// return c.String(http.StatusOK), selectedImages
-	return selectedImages
+	return nil, imagesJSON
 }
