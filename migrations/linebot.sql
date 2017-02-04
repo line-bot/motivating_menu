@@ -11,9 +11,10 @@ CREATE TABLE category
 (
 	id bigint unsigned NOT NULL AUTO_INCREMENT,
 	name varchar(30) NOT NULL,
+	imageUrl text,
 	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at timestamp NULL DEFAULT NULL
+    deleted_at timestamp NULL DEFAULT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -28,14 +29,14 @@ CREATE TABLE recipe
 	count3 bigint unsigned DEFAULT 0 NOT NULL,
 	count4 bigint unsigned DEFAULT 0 NOT NULL,
 	count5 bigint unsigned DEFAULT 0 NOT NULL,
-	count6 bigint unsigned NOT NULL,
+	count6 bigint unsigned DEFAULT 0 NOT NULL,
 	count7 bigint unsigned DEFAULT 0 NOT NULL,
 	count8 bigint unsigned DEFAULT 0 NOT NULL,
 	count9 bigint unsigned DEFAULT 0 NOT NULL,
 	count10 bigint unsigned DEFAULT 0 NOT NULL,
 	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at timestamp NULL DEFAULT NULL
+    deleted_at timestamp NULL DEFAULT NULL,
 	PRIMARY KEY (id)
 );
 

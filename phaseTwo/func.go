@@ -4,30 +4,25 @@ import (
 	"database/sql"
 	"net/http"
 
+	"fmt"
+	"os"
+
 	"github.com/labstack/echo"
+	"github.com/line-bot/motivating_menu/model"
+	"strconv"
 )
 
 type PhaseTwo struct {
 	DB *sql.DB
 }
 
-var res = `
-[
-    {
-        "category": "1",
-        "imageUrl": "https://s3-us-west-2.amazonaws.com/lineapitest/hamburger_240.jpeg"
-    },
-    {
-        "category": "2",
-        "imageUrl": "https://s3-us-west-2.amazonaws.com/lineapitest/pizza_240.jpeg"
-    },
-    {
-        "category": "3",
-        "https://s3-us-west-2.amazonaws.com/lineapitest/bread_240.jpeg"
-    }
-]
-`
-
 func (p *PhaseTwo) Response(c echo.Context) error {
-	return c.JSON(http.StatusOK, res)
+	categoryId := c.QueryParam("category_id")
+	ci, _ := strconv.Atoi(categoryId)
+	recipe, err := model.RecipeRecommend(p.DB, ci)
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+	}
+	c.Response().Header().Set("Content-Type", "application/json")
+	return c.JSON(http.StatusOK, recipe)
 }

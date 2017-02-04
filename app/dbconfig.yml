@@ -10,5 +10,5 @@
 # see: http://dsas.blog.klab.org/archives/52191467.html
 development:
   dialect: mysql
-  datasource: motivating_menu:123@tcp(localhost:3306)/motivating_menu?parseTime=true&collation=utf8_general_ci&interpolateParams=true
+  datasource: motivating_menu:123@tcp(localhost:3306)/motivating_menu?parseTime=true&collation=utf8mb4_general_ci&interpolateParams=true
   dir: migrations
