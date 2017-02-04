@@ -3,8 +3,17 @@ package main
 import (
 	"log"
 	"net/http"
+<<<<<<< HEAD
 	"fmt"
 	"github.com/line/line-bot-sdk-go/linebot"
+=======
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+	"github.com/line-bot/motivating_menu/api"
+	"github.com/line-bot/motivating_menu/db"
+	_ "github.com/go-sql-driver/mysql"
+>>>>>>> parent of a83d5d4... 動く状態にした
 )
 
 func main() {
@@ -16,6 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+<<<<<<< HEAD
 	// Setup HTTP Server for receiving requests from LINE platform
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		fmt.Printf("ping\n")
@@ -46,4 +56,37 @@ func main() {
 	if err := http.ListenAndServe(":1337", nil); err != nil {
 		log.Fatal(err)
 	}
+=======
+func (s *Server) Run() {
+
+	api := &api.Request{DB: s.db}
+
+	s.echo = echo.New()
+
+	s.echo.Use(middleware.Logger())
+	s.echo.Use(middleware.Recover())
+	s.echo.Use(middleware.CORS())
+
+	s.echo.GET("/callback", api.Line)
+	s.echo.GET("/api/get", api.GetTest)
+    s.echo.GET("/test", api.Test)
+	s.echo.POST("/api/post", api.PostTest)
+	s.echo.PUT("/api/put", api.PutTest)
+	s.echo.DELETE("/api/delete", api.DeleteTest)
+
+	s.echo.Pre(middleware.RemoveTrailingSlash())
+	http.Handle("/", s.echo)
+}
+
+func init() {
+	var (
+		dbconf = flag.String("dbconf", "dbconfig.yml", "database configuration file.")
+		env    = flag.String("env", "development", "application envirionment (production, development etc.)")
+	)
+
+	flag.Parse()
+	s := New()
+	s.Setup(*dbconf, *env)
+	s.Run()
+>>>>>>> parent of a83d5d4... 動く状態にした
 }

@@ -5,6 +5,7 @@ import (
 
     "github.com/line/line-bot-sdk-go/linebot"
 	"github.com/labstack/echo"
+	"fmt"
 )
 
 func (r *Request) Test(c echo.Context) error {
