@@ -3,6 +3,7 @@ ENV:=development
 
 setup:
 	which glide || go get -v github.com/Masterminds/glide
+	go get github.com/line/line-bot-sdk-go/linebot
 	glide install
 
 devSetup:

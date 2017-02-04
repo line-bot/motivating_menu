@@ -45,6 +45,7 @@ func (s *Server) Run() {
 	s.echo.Use(middleware.Recover())
 	s.echo.Use(middleware.CORS())
 
+	s.echo.GET("/callback", api.Line)
 	s.echo.GET("/api/get", api.GetTest)
 	s.echo.POST("/api/post", api.PostTest)
 	s.echo.PUT("/api/put", api.PutTest)
