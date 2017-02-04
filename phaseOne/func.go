@@ -1,6 +1,7 @@
 package phaseOne
 
 import (
+	"bytes"
 	"database/sql"
 	"encoding/json"
 	"log"
@@ -126,6 +127,9 @@ func (p *PhaseOne) Response(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, imagesJSON)
+	var buf bytes.Buffer
+	buf.Write(imagesJSON)
+
+	return c.JSON(http.StatusOK, buf.String())
 	//return nil, imagesJSON
 }
