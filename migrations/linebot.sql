@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2017 年 2 月 05 日 03:09
+-- Generation Time: 2017 年 2 月 05 日 03:25
 -- サーバのバージョン： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `motivating_menu`
 --
-CREATE DATABASE IF NOT EXISTS `motivating_menu` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `motivating_menu`;
 
 -- --------------------------------------------------------
 
@@ -31,9 +29,9 @@ USE `motivating_menu`;
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `imageUrl` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `name` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `imageUrl` text CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `category`
@@ -61,8 +59,8 @@ DROP TABLE IF EXISTS `recipe`;
 CREATE TABLE `recipe` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `imageUrl` text NOT NULL,
+  `name` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `imageUrl` text CHARACTER SET utf8mb4 NOT NULL,
   `count1` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `count2` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `count3` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
@@ -73,7 +71,7 @@ CREATE TABLE `recipe` (
   `count8` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `count9` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `count10` bigint(20) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `recipe`
