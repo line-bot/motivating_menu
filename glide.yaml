@@ -11,3 +11,4 @@ import:
 - package: google.golang.org/appengine/...
 - package: github.com/mjibson/goon
 - package: cloud.google.com/go/storage
+- package: golang.org/x/net/context

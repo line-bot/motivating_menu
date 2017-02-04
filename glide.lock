@@ -1,5 +1,5 @@
-hash: c0462d5f4e9ac12845c29452d9f90f0768727413bd796a67f1e4e76a870ebeb0
-updated: 2017-02-04T16:12:39.069162983+09:00
+hash: a537e0dab51c75eb891e53b235ff1f18af1af0fdff5bab03ae2230e4c1f72da1
+updated: 2017-02-04T18:54:52.380051714+09:00
 imports:
 - name: cloud.google.com/go
   version: 3258e6905e9694db9bcd41910c65ecc30ae6dbbe
@@ -20,6 +20,10 @@ imports:
   - color
   - log
   - random
+- name: github.com/line/line-bot-sdk-go
+  version: cda5202f030a1e284c005854d45ef84c0ef460da
+  subpackages:
+  - linebot
 - name: github.com/mattn/go-colorable
   version: d228849504861217f796da67fae4f6e347643f15
 - name: github.com/mattn/go-isatty
