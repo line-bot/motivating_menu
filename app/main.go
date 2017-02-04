@@ -1,62 +1,39 @@
-package main
+package server
 
 import (
+	"database/sql"
+	"flag"
 	"log"
 	"net/http"
-<<<<<<< HEAD
-	"fmt"
-	"github.com/line/line-bot-sdk-go/linebot"
-=======
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/line-bot/motivating_menu/api"
 	"github.com/line-bot/motivating_menu/db"
-	_ "github.com/go-sql-driver/mysql"
->>>>>>> parent of a83d5d4... 動く状態にした
 )
 
-func main() {
-	bot, err := linebot.New(
-		"18201c5163a1184f1ce066735de7aef9",
-		"SQDMB6vhPx3kQGReeVcsYUBzSvupkzzq0u4/jKOX9VTilvz+FEdnm/dgGwogHXmHh7+p4u94t/6PBoR034kgHfYzc5d/pIuMW+vlP8LxIb9KG78QkHHPn5n0EgXx44XIzkbu5lVZSveUYkoiLlTMPgdB04t89/1O/w1cDnyilFU=",
-	)
+type Server struct {
+	db   *sql.DB
+	echo *echo.Echo
+}
+
+func New() *Server {
+	return &Server{}
+}
+
+func (s *Server) Setup(dbconf, env string) {
+
+	cs, err := db.NewConfigsFromFile(dbconf)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("cannot open database configuration. exit. %s", err)
 	}
-
-<<<<<<< HEAD
-	// Setup HTTP Server for receiving requests from LINE platform
-	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Printf("ping\n")
-		events, err := bot.ParseRequest(req)
-		if err != nil {
-			if err == linebot.ErrInvalidSignature {
-				w.WriteHeader(400)
-			} else {
-				w.WriteHeader(500)
-			}
-			return
-		}
-		for _, event := range events {
-			if event.Type == linebot.EventTypeMessage {
-				switch message := event.Message.(type) {
-				case *linebot.TextMessage:
-					fmt.Printf("%v", message)
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-						log.Print(err)
-					}
-				}
-			}
-		}
-	})
-
-	// This is just a sample code.
-	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or
-	if err := http.ListenAndServe(":1337", nil); err != nil {
-		log.Fatal(err)
+	s.db, err = cs.Open(env)
+	if err != nil {
+		log.Fatalf("db initialization failed: %s", err)
 	}
-=======
+}
+
 func (s *Server) Run() {
 
 	api := &api.Request{DB: s.db}
@@ -69,7 +46,7 @@ func (s *Server) Run() {
 
 	s.echo.GET("/callback", api.Line)
 	s.echo.GET("/api/get", api.GetTest)
-    s.echo.GET("/test", api.Test)
+	s.echo.GET("/test", api.Test)
 	s.echo.POST("/api/post", api.PostTest)
 	s.echo.PUT("/api/put", api.PutTest)
 	s.echo.DELETE("/api/delete", api.DeleteTest)
@@ -88,5 +65,4 @@ func init() {
 	s := New()
 	s.Setup(*dbconf, *env)
 	s.Run()
->>>>>>> parent of a83d5d4... 動く状態にした
 }
