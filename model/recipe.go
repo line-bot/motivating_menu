@@ -7,7 +7,7 @@ import (
 )
 
 func RecipeAll(db *sql.DB) ([]Recipe, error) {
-	rows, err := db.Query(`select id,name from recipe`)
+	rows, err := db.Query(`select id,name,imageUrl from recipe`)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func RecipeRecommend(db *sql.DB, categoryId int) ([]Recipe, error) {
 	// 最高にひどい
 	countColumn := fmt.Sprintf("count%d", categoryId)
 	//countColumn := "count" + categoryId
-	query := fmt.Sprintf("select id,name from recipe order by %s desc limit 5", countColumn)
+	query := fmt.Sprintf("select id,name,imageUrl from recipe order by %s desc limit 5", countColumn)
 
 	rows, err := db.Query(query)
 	if err != nil {
