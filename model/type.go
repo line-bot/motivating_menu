@@ -7,7 +7,7 @@ type Category struct {
 }
 
 type Recipe struct {
-	ID       int    `json:"id"`
+	ID       string `json:"id"`
 	Name     string `json:"name"`
 	ImageUrl string `json:"imageUrl"`
 }
