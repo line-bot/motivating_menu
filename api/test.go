@@ -6,7 +6,6 @@ import (
 	"database/sql"
 
 	"github.com/labstack/echo"
-	"fmt"
 )
 
 type Request struct {
