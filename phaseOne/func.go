@@ -46,59 +46,59 @@ type PhaseOne struct {
 
 // imageは画像URLとcategoryを持ちます
 type Image struct {
-	category string
-	ImageURL string
+	Category string `json:"category"`
+	ImageURL string `json:"imageUrl"`
 }
 
 func createImages() []Image {
 
 	image1 := Image{
-		category: "1",
+		Category: "1",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619284/d3d3681a-eb34-11e6-9f74-f513ec33182a.jpeg",
 	}
 
 	image2 := Image{
-		category: "2",
+		Category: "2",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619296/135cc1a2-eb35-11e6-83ff-884fbfdb00e8.jpg",
 	}
 
 	image3 := Image{
-		category: "3",
+		Category: "3",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619306/546cefd2-eb35-11e6-8679-dac4ea32744c.jpg",
 	}
 
 	image4 := Image{
-		category: "4",
+		Category: "4",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619310/78fd2bb4-eb35-11e6-9ab0-6e3028262131.jpg",
 	}
 
 	image5 := Image{
-		category: "5",
+		Category: "5",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619318/b36b904c-eb35-11e6-8167-8e6e28c817df.jpeg",
 	}
 
 	image6 := Image{
-		category: "6",
+		Category: "6",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619326/d91039ba-eb35-11e6-98e5-182e416c50fd.jpg",
 	}
 
 	image7 := Image{
-		category: "7",
+		Category: "7",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619334/14edaae4-eb36-11e6-9453-1330495134af.jpeg",
 	}
 
 	image8 := Image{
-		category: "8",
+		Category: "8",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619339/3e38e558-eb36-11e6-8778-4776e13cf313.jpg",
 	}
 
 	image9 := Image{
-		category: "9",
+		Category: "9",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619362/782bd6e4-eb36-11e6-8d4e-e7ef2c228817.jpeg",
 	}
 
 	image10 := Image{
-		category: "10",
+		Category: "10",
 		ImageURL: "https://cloud.githubusercontent.com/assets/25542931/22619393/2d648cc2-eb37-11e6-80be-1f53691533ad.jpeg",
 	}
 
