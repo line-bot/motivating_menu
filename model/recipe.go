@@ -24,7 +24,7 @@ func RecipeRecommend(db *sql.DB, categoryId int) ([]Recipe, error) {
 	// 最高にひどい
 	countColumn := fmt.Sprintf("count%d", categoryId)
 	//countColumn := "count" + categoryId
-	query := fmt.Sprintf("select id,name from recipe where %s", countColumn)
+	query := fmt.Sprintf("select id,name from recipe order by %s desc limit 5", countColumn)
 
 	rows, err := db.Query(query)
 	if err != nil {

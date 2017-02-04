@@ -9,6 +9,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/line-bot/motivating_menu/model"
+	"strconv"
 )
 
 type PhaseTwo struct {
@@ -16,14 +17,9 @@ type PhaseTwo struct {
 }
 
 func (p *PhaseTwo) Response(c echo.Context) error {
-	//categoryId := c.QueryParam("category_id")
-	//ci, _ := strconv.Atoi(categoryId)
-	//recipe, err := model.RecipeRecommend(p.DB, ci)
-	//if err != nil {
-	//	fmt.Fprint(os.Stderr, err)
-	//}
-
-	recipe, err := model.RecipeAll(p.DB)
+	categoryId := c.QueryParam("category_id")
+	ci, _ := strconv.Atoi(categoryId)
+	recipe, err := model.RecipeRecommend(p.DB, ci)
 	if err != nil {
 		fmt.Fprint(os.Stderr, err)
 	}
