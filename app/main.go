@@ -9,8 +9,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/line-bot/motivating_menu/api"
 	"github.com/line-bot/motivating_menu/db"
+	"github.com/line-bot/motivating_menu/phaseOne"
+	"github.com/line-bot/motivating_menu/phaseTwo"
 )
 
 type Server struct {
@@ -36,7 +37,8 @@ func (s *Server) Setup(dbconf, env string) {
 
 func (s *Server) Run() {
 
-	api := &api.Request{DB: s.db}
+	phaseOne := &phaseOne.PhaseOne{DB: s.db}
+	phaseTwo := &phaseTwo.PhaseTwo{DB: s.db}
 
 	s.echo = echo.New()
 
@@ -44,12 +46,8 @@ func (s *Server) Run() {
 	s.echo.Use(middleware.Recover())
 	s.echo.Use(middleware.CORS())
 
-	s.echo.GET("/callback", api.Line)
-	s.echo.GET("/api/get", api.GetTest)
-	s.echo.GET("/test", api.Test)
-	s.echo.POST("/api/post", api.PostTest)
-	s.echo.PUT("/api/put", api.PutTest)
-	s.echo.DELETE("/api/delete", api.DeleteTest)
+	s.echo.GET("/api/phase1", phaseOne.Response)
+	s.echo.GET("/api/phase2", phaseTwo.Response)
 
 	s.echo.Pre(middleware.RemoveTrailingSlash())
 	http.Handle("/", s.echo)
