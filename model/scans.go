@@ -4,25 +4,27 @@ package model
 
 import "database/sql"
 
-func ScanEvent(r *sql.Row) (Event, error) {
-	var s Event
+func ScanCategory(r *sql.Row) (Category, error) {
+	var s Category
 	if err := r.Scan(
 		&s.ID,
 		&s.Name,
+		&s.ImageUrl,
 	); err != nil {
-		return Event{}, err
+		return Category{}, err
 	}
 	return s, nil
 }
 
-func ScanEvents(rs *sql.Rows) ([]Event, error) {
-	structs := make([]Event, 0, 16)
+func ScanCategorys(rs *sql.Rows) ([]Category, error) {
+	structs := make([]Category, 0, 16)
 	var err error
 	for rs.Next() {
-		var s Event
+		var s Category
 		if err = rs.Scan(
 			&s.ID,
 			&s.Name,
+			&s.ImageUrl,
 		); err != nil {
 			return nil, err
 		}
@@ -34,8 +36,8 @@ func ScanEvents(rs *sql.Rows) ([]Event, error) {
 	return structs, nil
 }
 
-func ScanEventJson(r *sql.Row) (EventJson, error) {
-	var s EventJson
+func ScanRecipe(r *sql.Row) (Recipe, error) {
+	var s Recipe
 	if err := r.Scan(
 		&s.ID,
 		&s.Name,
@@ -51,16 +53,16 @@ func ScanEventJson(r *sql.Row) (EventJson, error) {
 		&s.Count9,
 		&s.Count10,
 	); err != nil {
-		return EventJson{}, err
+		return Recipe{}, err
 	}
 	return s, nil
 }
 
-func ScanEventJsons(rs *sql.Rows) ([]EventJson, error) {
-	structs := make([]EventJson, 0, 16)
+func ScanRecipes(rs *sql.Rows) ([]Recipe, error) {
+	structs := make([]Recipe, 0, 16)
 	var err error
 	for rs.Next() {
-		var s EventJson
+		var s Recipe
 		if err = rs.Scan(
 			&s.ID,
 			&s.Name,

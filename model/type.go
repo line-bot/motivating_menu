@@ -1,11 +1,12 @@
 package model
 
-type Event struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
+type Category struct {
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	ImageUrl string `json:"imageUrl"`
 }
 
-type EventJson struct {
+type Recipe struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
 	CategoryID int    `json:"category_id"`

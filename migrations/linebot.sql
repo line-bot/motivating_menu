@@ -11,6 +11,7 @@ CREATE TABLE category
 (
 	id bigint unsigned NOT NULL AUTO_INCREMENT,
 	name varchar(30) NOT NULL,
+	imageUrl text,
 	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at timestamp NULL DEFAULT NULL,
