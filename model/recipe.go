@@ -14,6 +14,14 @@ func RecipeAll(db *sql.DB) ([]Recipe, error) {
 	return ScanRecipes(rows)
 }
 
+func RecipeRand(db *sql.DB) ([]Recipe, error) {
+	rows, err := db.Query(`select id,name,imageUrl from recipe order by rand() limit 2`)
+	if err != nil {
+		return nil, err
+	}
+	return ScanRecipes(rows)
+}
+
 func RecipeRecommend(db *sql.DB, categoryId int) ([]Recipe, error) {
 
 	// SQLインジェクション楽しい
@@ -24,7 +32,7 @@ func RecipeRecommend(db *sql.DB, categoryId int) ([]Recipe, error) {
 	// 最高にひどい
 	countColumn := fmt.Sprintf("count%d", categoryId)
 	//countColumn := "count" + categoryId
-	query := fmt.Sprintf("select id,name,imageUrl from recipe order by %s desc limit 5", countColumn)
+	query := fmt.Sprintf("select id,name,imageUrl from recipe order by %s desc limit 3", countColumn)
 
 	rows, err := db.Query(query)
 	if err != nil {

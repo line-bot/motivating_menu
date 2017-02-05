@@ -19,10 +19,20 @@ type PhaseTwo struct {
 func (p *PhaseTwo) Response(c echo.Context) error {
 	categoryId := c.QueryParam("category_id")
 	ci, _ := strconv.Atoi(categoryId)
-	recipe, err := model.RecipeRecommend(p.DB, ci)
+
+	recipe1, err := model.RecipeRecommend(p.DB, ci)
 	if err != nil {
 		fmt.Fprint(os.Stderr, err)
 	}
+
+	recipe2, err := model.RecipeRand(p.DB)
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+	}
+
+	var recipe []model.Recipe
+	recipe = append(recipe1, recipe2...)
+
 	c.Response().Header().Set("Content-Type", "application/json")
 	return c.JSON(http.StatusOK, recipe)
 }
