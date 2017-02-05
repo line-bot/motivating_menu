@@ -32,3 +32,19 @@ func RecipeRecommend(db *sql.DB, categoryId int) ([]Recipe, error) {
 	}
 	return ScanRecipes(rows)
 }
+
+func RecipeLog(db *sql.DB, categoryId int, menuId string) error {
+
+	// SQLインジェクション楽しい
+	if !(1 <= categoryId && categoryId <= 10) {
+		categoryId = rand.Intn(10) + 1
+	}
+	// 最高にひどい
+	countColumn := fmt.Sprintf("count%d", categoryId)
+
+	query := fmt.Sprintf("UPDATE recipe SET %s=%s+1 WHERE id=?", countColumn, countColumn)
+	if _, err := db.Exec(query, menuId); err != nil {
+		return err
+	}
+	return nil
+}

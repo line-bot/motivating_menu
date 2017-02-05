@@ -12,6 +12,7 @@ import (
 	"github.com/line-bot/motivating_menu/db"
 	"github.com/line-bot/motivating_menu/phaseOne"
 	"github.com/line-bot/motivating_menu/phaseTwo"
+	"github.com/line-bot/motivating_menu/phaseThree"
 )
 
 type Server struct {
@@ -39,6 +40,7 @@ func (s *Server) Run() {
 
 	phaseOne := &phaseOne.PhaseOne{DB: s.db}
 	phaseTwo := &phaseTwo.PhaseTwo{DB: s.db}
+	phaseThree := &phaseThree.PhaseThree{DB: s.db}
 
 	s.echo = echo.New()
 
@@ -46,8 +48,10 @@ func (s *Server) Run() {
 	s.echo.Use(middleware.Recover())
 	s.echo.Use(middleware.CORS())
 
+
 	s.echo.GET("/api/phase1", phaseOne.Response)
 	s.echo.GET("/api/phase2", phaseTwo.Response)
+	s.echo.GET("/api/phase3", phaseThree.Response)
 
 	s.echo.Pre(middleware.RemoveTrailingSlash())
 	http.Handle("/", s.echo)
