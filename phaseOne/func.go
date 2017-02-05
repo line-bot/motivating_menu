@@ -112,9 +112,21 @@ func (p *PhaseOne) Response(c echo.Context) error {
 
 	rand.Seed(time.Now().Unix())
 	images := createImages()
-	selectedImage1 := images[rand.Intn(len(images))]
-	selectedImage2 := images[rand.Intn(len(images))]
-	selectedImage3 := images[rand.Intn(len(images))]
+
+	i1 := rand.Intn(len(images))
+	selectedImage1 := images[i1]
+
+	i2 := rand.Intn(len(images))
+	for i1 == i2 {
+		i2 = rand.Intn(len(images))
+	}
+	selectedImage2 := images[i2]
+
+	i3 := rand.Intn(len(images))
+	for i1 == i2 || i1 == i3 {
+		i3 = rand.Intn(len(images))
+	}
+	selectedImage3 := images[i3]
 
 	var selectedImages []Image
 	selectedImages = append(selectedImages, selectedImage1, selectedImage2, selectedImage3)
